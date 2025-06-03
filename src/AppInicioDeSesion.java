@@ -12,72 +12,71 @@ public class AppInicioDeSesion {
 
         String usuarioMaestro = "maestro1";
         String contrasenaMaestro = "abcd";
-
+        
         System.out.println("Por favor ingrese su rol:");
         System.out.println("1. Estudiante");
         System.out.println("2. Maestro");
 
         String rol = sc.nextLine();
-
+         while (true) { 
         if (rol.equals("1")) {
-            if (inicioSesionEstudiante(sc, usuarioEstudiante, contrasenaEstudiante)) {
-                boolean seguirEvaluando = true;
-                while (seguirEvaluando) {
-                    System.out.println("\nSeleccione al docente que desea calificar:");
-                    System.out.println("1. Jaime Alberto Zapata");
-                    System.out.println("2. Luis Fernando Zapata");
-                    System.out.println("3. Mateo Gomez");
-                    System.out.println("4. Cristina Avendaño");
-                    System.out.println("5. Camilo Echeverri");
-                    String opcionDocente = sc.nextLine();
+            
+           
+            boolean seguirEvaluando = true;
+            while (seguirEvaluando) {
+                System.out.println("Seleccione el docente que desea calificar:");
+                System.out.println("1. Jaime Alberto Zapata");
+                System.out.println("2. Luis Fernando Zapata");
+                System.out.println("3. Mateo Gomez");
+                System.out.println("4. Cristina Avendaño");
+                System.out.println("5. Camilo Echeverri");
+                String opcion = sc.nextLine();
 
-                    switch (opcionDocente) {
-                        case "1":
-                            System.out.println("Ha seleccionado a Jaime Alberto Zapata.");
-                            realizarEvaluacion(sc);
-                            break;
-                        case "2":
-                            System.out.println("Ha seleccionado a Luis Fernando Zapata.");
-                            realizarEvaluacion(sc);
-                            break;
-                        case "3":
-                            System.out.println("Ha seleccionado a Mateo Gomez.");
-                            realizarEvaluacion(sc);
-                            break;
-                        case "4":
-                            System.out.println("Ha seleccionado a Cristina Avendaño.");
-                            realizarEvaluacion(sc);
-                            break;
-                        case "5":
-                            System.out.println("Ha seleccionado a Camilo Echeverri.");
-                            realizarEvaluacion(sc);
-                            break;
-                        default:
-                            System.out.println("Opción inválida.");
-                            continue;
-                    }
+                switch (opcion) {
+                    case "1":
+                        System.out.println("Ha seleccionado a Jaime Alberto Zapata.");
+                        realizarEvaluacion(sc);
+                        break;
+                    case "2":
+                        System.out.println("Ha seleccionado a Luis Fernando Zapata.");
+                        realizarEvaluacion(sc);
+                        break;
+                    case "3":
+                        System.out.println("Ha seleccionado a Mateo Gomez.");
+                        realizarEvaluacion(sc);
+                        break;
+                    case "4":
+                        System.out.println("Ha seleccionado a Cristina Avendaño.");
+                        realizarEvaluacion(sc);
+                        break;
+                    case "5":
+                        System.out.println("Ha seleccionado a Camilo Echeverri.");
+                        realizarEvaluacion(sc);
+                        break;
+                    default:
+                        System.out.println("Opción inválida.");
+                        continue;
+                }
 
-                    System.out.println("\n¿Desea calificar a otro docente? (1. si / 2. no)");
-                    String respuesta = sc.nextLine();
-                    if (!respuesta.equalsIgnoreCase("1")) {
-                        seguirEvaluando = false;
-                    }
+                System.out.println("\n¿Desea calificar a otro docente? (1. sí / 2. no): ");
+                String respuesta = sc.nextLine();
+
+                if (respuesta.equalsIgnoreCase("2")) {
+                    System.out.println("Reiniciando programa...\n");
+                    break; 
                 }
             }
         } else if (rol.equals("2")) {
-            if (inicioSesionMaestro(sc, usuarioMaestro, contrasenaMaestro)) {
-                System.out.println("Aquí podría ir el panel del maestro...");
-            }
         } else {
             System.out.println("Rol no reconocido. Intente nuevamente.");
         }
 
-        sc.close();
 
         System.out.println("\n---- RESUMEN TOTAL DE NOTAS DE TODOS LOS ESTUDIANTES ----");
         for (int i = 0; i < resumenNotasTotales.length; i++) {
             System.out.println((i + 1) + " estrella(s): " + resumenNotasTotales[i] + " respuesta(s)");
         }
+     } 
     }
 
     public static boolean inicioSesionEstudiante(Scanner sc, String usuario, String contrasena) {
