@@ -2,10 +2,9 @@ import java.util.Scanner;
 
 public class AppInicioDeSesion {
 
-    // Arreglo global para acumular las respuestas de todos los estudiantes
     static int[] resumenNotasTotales = new int[5];
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         String usuarioEstudiante = "estudiante1";
@@ -21,112 +20,53 @@ public class AppInicioDeSesion {
         String rol = sc.nextLine();
 
         if (rol.equals("1")) {
-            System.out.println("Ingrese su nombre de usuario:");
-            String usuarioIngresadoEst = sc.nextLine();
+            if (inicioSesionEstudiante(sc, usuarioEstudiante, contrasenaEstudiante)) {
+                boolean seguirEvaluando = true;
+                while (seguirEvaluando) {
+                    System.out.println("\nSeleccione al docente que desea calificar:");
+                    System.out.println("1. Jaime Alberto Zapata");
+                    System.out.println("2. Luis Fernando Zapata");
+                    System.out.println("3. Mateo Gomez");
+                    System.out.println("4. Cristina Avendaño");
+                    System.out.println("5. Camilo Echeverri");
+                    String opcionDocente = sc.nextLine();
 
-            System.out.println("Ingrese su contraseña:");
-            String contrasenaIngresadaEst = sc.nextLine();
-
-            if (usuarioIngresadoEst.equals(usuarioEstudiante) && contrasenaIngresadaEst.equals(contrasenaEstudiante)) {
-                System.out.println("Inicio de sesión exitoso. ¡Bienvenido estudiante!");
-                realizarEvaluacion(sc);
-            } else {
-                System.out.println("Credenciales incorrectas.");
-                System.out.println("¿Qué desea hacer?");
-                System.out.println("1. Volver a intentar");
-                System.out.println("2. Cambiar contraseña");
-                String opcionEst = sc.nextLine();
-
-                if (opcionEst.equals("1")) {
-                    System.out.println("Ingrese su nombre de usuario:");
-                    usuarioIngresadoEst = sc.nextLine();
-
-                    System.out.println("Ingrese su contraseña:");
-                    contrasenaIngresadaEst = sc.nextLine();
-
-                    if (usuarioIngresadoEst.equals(usuarioEstudiante) && contrasenaIngresadaEst.equals(contrasenaEstudiante)) {
-                        System.out.println("Inicio de sesión exitoso. ¡Bienvenido estudiante!");
-                        realizarEvaluacion(sc);
-                    } else {
-                        System.out.println("Segundo intento fallido. Debe recuperar su contraseña.");
-                        System.out.println("Por favor digite su correo institucional:");
-                        String correoInstitucional = sc.nextLine();
-
-                        if (correoInstitucional.contains("@cesde.net")) {
-                            System.out.println("Correo válido. Verifique el código que acaba de llegar y escríbalo aquí:");
-                            String codigo = sc.nextLine();
-                            System.out.println("Código recibido. Se enviará un enlace para restablecer la contraseña.");
-                        } else {
-                            System.out.println("Correo no válido, por favor ingrese uno institucional.");
-                        }
+                    switch (opcionDocente) {
+                        case "1":
+                            System.out.println("Ha seleccionado a Jaime Alberto Zapata.");
+                            realizarEvaluacion(sc);
+                            break;
+                        case "2":
+                            System.out.println("Ha seleccionado a Luis Fernando Zapata.");
+                            realizarEvaluacion(sc);
+                            break;
+                        case "3":
+                            System.out.println("Ha seleccionado a Mateo Gomez.");
+                            realizarEvaluacion(sc);
+                            break;
+                        case "4":
+                            System.out.println("Ha seleccionado a Cristina Avendaño.");
+                            realizarEvaluacion(sc);
+                            break;
+                        case "5":
+                            System.out.println("Ha seleccionado a Camilo Echeverri.");
+                            realizarEvaluacion(sc);
+                            break;
+                        default:
+                            System.out.println("Opción inválida.");
+                            continue;
                     }
-                } else if (opcionEst.equals("2")) {
-                    System.out.println("Para recuperar su contraseña, digite su correo institucional:");
-                    String correoInstitucional = sc.nextLine();
 
-                    if (correoInstitucional.contains("@cesde.net")) {
-                        System.out.println("Correo válido. Verifique el código que acaba de llegar y escríbalo aquí:");
-                        String codigo = sc.nextLine();
-                        System.out.println("Código recibido. Se enviará un enlace para restablecer la contraseña.");
-                    } else {
-                        System.out.println("Correo no válido, por favor ingrese uno institucional.");
+                    System.out.println("\n¿Desea calificar a otro docente? (1. si / 2. no)");
+                    String respuesta = sc.nextLine();
+                    if (!respuesta.equalsIgnoreCase("1")) {
+                        seguirEvaluando = false;
                     }
-                } else {
-                    System.out.println("Opción no válida.");
                 }
             }
         } else if (rol.equals("2")) {
-            System.out.println("Ingrese su nombre de usuario:");
-            String usuarioIngresadoMaestro = sc.nextLine();
-
-            System.out.println("Ingrese su contraseña:");
-            String contrasenaIngresadaMaestro = sc.nextLine();
-
-            if (usuarioIngresadoMaestro.equals(usuarioMaestro) && contrasenaIngresadaMaestro.equals(contrasenaMaestro)) {
-                System.out.println("Inicio de sesión exitoso. ¡Bienvenido maestro!");
-            } else {
-                System.out.println("Credenciales incorrectas.");
-                System.out.println("¿Qué desea hacer?");
-                System.out.println("1. Volver a intentar");
-                System.out.println("2. Cambiar contraseña");
-                String opcion = sc.nextLine();
-
-                if (opcion.equals("1")) {
-                    System.out.println("Ingrese su nombre de usuario:");
-                    usuarioIngresadoMaestro = sc.nextLine();
-
-                    System.out.println("Ingrese su contraseña:");
-                    contrasenaIngresadaMaestro = sc.nextLine();
-
-                    if (usuarioIngresadoMaestro.equals(usuarioMaestro) && contrasenaIngresadaMaestro.equals(contrasenaMaestro)) {
-                        System.out.println("Inicio de sesión exitoso. ¡Bienvenido maestro!");
-                    } else {
-                        System.out.println("Segundo intento fallido. Debe recuperar su contraseña.");
-                        System.out.println("Digite su correo profesional:");
-                        String correo = sc.nextLine();
-
-                        if (correo.contains("@cesde.net")) {
-                            System.out.println("Correo válido. Verifique el código que acaba de llegar y escríbalo aquí:");
-                            String codigo = sc.nextLine();
-                            System.out.println("Código recibido. Se enviará un enlace para restablecer la contraseña.");
-                        } else {
-                            System.out.println("Correo no válido, por favor ingrese uno profesional.");
-                        }
-                    }
-                } else if (opcion.equals("2")) {
-                    System.out.println("Digite su correo profesional:");
-                    String correo = sc.nextLine();
-
-                    if (correo.contains("@cesde.net")) {
-                        System.out.println("Correo válido. Verifique el código que acaba de llegar y escríbalo aquí:");
-                        String codigo = sc.nextLine();
-                        System.out.println("Código recibido. Se enviará un enlace para restablecer la contraseña.");
-                    } else {
-                        System.out.println("Correo no válido.");
-                    }
-                } else {
-                    System.out.println("Opción no válida.");
-                }
+            if (inicioSesionMaestro(sc, usuarioMaestro, contrasenaMaestro)) {
+                System.out.println("Aquí podría ir el panel del maestro...");
             }
         } else {
             System.out.println("Rol no reconocido. Intente nuevamente.");
@@ -134,10 +74,78 @@ public class AppInicioDeSesion {
 
         sc.close();
 
-        // Mostrar resumen total de notas al final (acumuladas por todos los estudiantes)
         System.out.println("\n---- RESUMEN TOTAL DE NOTAS DE TODOS LOS ESTUDIANTES ----");
         for (int i = 0; i < resumenNotasTotales.length; i++) {
             System.out.println((i + 1) + " estrella(s): " + resumenNotasTotales[i] + " respuesta(s)");
+        }
+    }
+
+    public static boolean inicioSesionEstudiante(Scanner sc, String usuario, String contrasena) {
+        System.out.println("Ingrese su nombre de usuario:");
+        String usuarioIngresado = sc.nextLine();
+        System.out.println("Ingrese su contraseña:");
+        String contrasenaIngresada = sc.nextLine();
+
+        if (usuarioIngresado.equals(usuario) && contrasenaIngresada.equals(contrasena)) {
+            System.out.println("Inicio de sesión exitoso. ¡Bienvenido estudiante!");
+            return true;
+        } else {
+            System.out.println("Credenciales incorrectas.");
+            System.out.println("¿Qué desea hacer?");
+            System.out.println("1. Volver a intentar");
+            System.out.println("2. Cambiar contraseña");
+            String opcion = sc.nextLine();
+
+            if (opcion.equals("1")) {
+                return inicioSesionEstudiante(sc, usuario, contrasena);
+            } else if (opcion.equals("2")) {
+                recuperarContrasena(sc, "institucional");
+                return false;
+            } else {
+                System.out.println("Opción no válida.");
+                return false;
+            }
+        }
+    }
+
+    public static boolean inicioSesionMaestro(Scanner sc, String usuario, String contrasena) {
+        System.out.println("Ingrese su nombre de usuario:");
+        String usuarioIngresado = sc.nextLine();
+        System.out.println("Ingrese su contraseña:");
+        String contrasenaIngresada = sc.nextLine();
+
+        if (usuarioIngresado.equals(usuario) && contrasenaIngresada.equals(contrasena)) {
+            System.out.println("Inicio de sesión exitoso. ¡Bienvenido maestro!");
+            return true;
+        } else {
+            System.out.println("Credenciales incorrectas.");
+            System.out.println("¿Qué desea hacer?");
+            System.out.println("1. Volver a intentar");
+            System.out.println("2. Cambiar contraseña");
+            String opcion = sc.nextLine();
+
+            if (opcion.equals("1")) {
+                return inicioSesionMaestro(sc, usuario, contrasena);
+            } else if (opcion.equals("2")) {
+                recuperarContrasena(sc, "profesional");
+                return false;
+            } else {
+                System.out.println("Opción no válida.");
+                return false;
+            }
+        }
+    }
+
+    public static void recuperarContrasena(Scanner sc, String tipoCorreo) {
+        System.out.println("Digite su correo " + tipoCorreo + ":");
+        String correo = sc.nextLine();
+
+        if (correo.contains("@cesde.net")) {
+            System.out.println("Correo válido. Verifique el código que acaba de llegar y escríbalo aquí:");
+            String codigo = sc.nextLine();
+            System.out.println("Código recibido. Se enviará un enlace para restablecer la contraseña.");
+        } else {
+            System.out.println("Correo no válido, por favor ingrese uno " + tipoCorreo + ".");
         }
     }
 
@@ -179,10 +187,8 @@ public class AppInicioDeSesion {
                 nota = 1;
             }
 
-            resumenNotasTotales[nota - 1]++; // Acumula nota en el arreglo global
-
-            String estrellas = "*".repeat(nota);
-            System.out.println("La nota es: " + estrellas);
+            resumenNotasTotales[nota - 1]++;
+            System.out.println("La nota es: " + "*".repeat(nota));
         }
 
         System.out.println("¡Gracias por completar la evaluación!");
